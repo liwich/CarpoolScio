@@ -33,6 +33,12 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MyRoutesDetail.xaml.cs">
+      <DependentUpon>MyRoutesDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RoutesDetail.xaml.cs">
+      <DependentUpon>RoutesDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddCar.xaml.cs">
       <DependentUpon>AddCar.xaml</DependentUpon>
     </Compile>
@@ -181,6 +187,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\AddCar.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MyRoutesDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RoutesDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
