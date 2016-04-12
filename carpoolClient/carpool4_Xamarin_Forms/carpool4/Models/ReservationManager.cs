@@ -94,32 +94,5 @@ namespace carpool4.Models
             }
 
         }
-
-
-        public async Task<ObservableCollection<Reservation>> GetTodoItemsAsync(bool syncItems = false)
-        {
-            try
-            {
-#if OFFLINE_SYNC_ENABLED
-                if (syncItems)
-                {
-                    await this.SyncAsync();
-                }
-#endif
-                IEnumerable<Reservation> items = await reservationsTable.ToEnumerableAsync();
-
-                return new ObservableCollection<Reservation>(items);
-            }
-            catch (MobileServiceInvalidOperationException msioe)
-            {
-                Debug.WriteLine(@"Invalid sync operation: {0}", msioe.Message);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(@"Sync error: {0}", e.Message);
-            }
-            return null;
-        }
-
     }
 }

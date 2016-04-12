@@ -14,20 +14,9 @@ namespace Carpool
 
             
             InitializeComponent();
-            //MainPage = new NavigationPage(new Login());
             var loginPage = new NavigationPage(new Login());
-
-            init();
             MainPage = loginPage;
-           // MainPage = new Dashboard();
         }
-
-        async void init()
-        {
-           var l = await new ReservationManager().GetTodoItemsAsync();
-
-        }
-
 
         protected override void OnSleep()
         {
