@@ -47,7 +47,7 @@ namespace carpool4
 #else
             this.todoTable = client.GetTable<TodoItem>();
             TodoItem item = new TodoItem { Name = "Awesome item" };
-            todoTable.InsertAsync(item);
+            //todoTable.InsertAsync(item);
 #endif
         }
 

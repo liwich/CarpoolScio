@@ -41,7 +41,7 @@ namespace carpool4.Droid
             Log.Verbose("PushHandlerBroadcastReceiver", "GCM Registered: " + registrationId);
             RegistrationID = registrationId;
 
-            createNotification("GcmService Registered...", "The device has been Registered, Tap to View!");
+            //createNotification("GcmService Registered...", "The device has been Registered, Tap to View!");
 
             var push = TodoItemManager.DefaultManager.CurrentClient.GetPush();
 
