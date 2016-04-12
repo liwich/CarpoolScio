@@ -33,19 +33,22 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AddRoute.xaml.cs">
+    <Compile Include="Views\AddCar.xaml.cs">
+      <DependentUpon>AddCar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddRoute.xaml.cs">
       <DependentUpon>AddRoute.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppStart.xaml.cs">
       <DependentUpon>AppStart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboard.xaml.cs">
+    <Compile Include="Views\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyRoutes.xaml.cs">
+    <Compile Include="Views\MyRoutes.xaml.cs">
       <DependentUpon>MyRoutes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RoutesCell.xaml.cs">
+    <Compile Include="Views\RoutesCell.xaml.cs">
       <DependentUpon>RoutesCell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Profile.xaml.cs">
@@ -153,25 +156,31 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Dashboard.xaml">
+    <EmbeddedResource Include="Views\Dashboard.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RoutesCell.xaml">
+    <EmbeddedResource Include="Views\RoutesCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyRoutes.xaml">
+    <EmbeddedResource Include="Views\MyRoutes.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AddRoute.xaml">
+    <EmbeddedResource Include="Views\AddRoute.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AddCar.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

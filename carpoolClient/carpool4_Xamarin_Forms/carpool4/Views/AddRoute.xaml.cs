@@ -37,7 +37,7 @@ namespace Carpool
         {
             savePoints = true;
             carSelected = false;
-            //await Navigation.PushAsync(new AddCar());
+            await Navigation.PushAsync(new AddCar());
         }
 
         protected override async void OnAppearing()
