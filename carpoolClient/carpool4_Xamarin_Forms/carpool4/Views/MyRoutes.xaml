@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Carpool.MyRoutes"
+             Title="My Routes">
+
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Name="Add" Order="Primary" Priority="0" Clicked="AddRoute"/>
+  </ContentPage.ToolbarItems>
+
+  <StackLayout Style="{StaticResource contentPageStyle}">
+
+    <SearchBar x:Name="searchBar" Placeholder="Search Route" TextChanged="OnSearch"></SearchBar>
+    <StackLayout x:Name="errorLayout" HorizontalOptions="FillAndExpand"></StackLayout>
+    <ListView x:Name="routesListView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowHeight="100" BackgroundColor="White" SeparatorColor="#009688" IsPullToRefreshEnabled="True"></ListView>
+
+  </StackLayout>
+</ContentPage>

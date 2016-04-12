@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Carpool.MyRoutesDetail">
+  <ScrollView>
+    <StackLayout Style="{StaticResource contentPageStyle}">
+      <StackLayout  Style="{StaticResource stackContent}">
+        <Label Text="Driver Profile" FontAttributes="Bold" FontSize="Large"></Label>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+          <Image Source="profile.jpg" WidthRequest="100"></Image>
+          <StackLayout Orientation="Vertical" Padding="15,0,0,0">
+            <Label x:Name="nameLabel" FontSize="Large" ></Label>
+            <Label x:Name="ageLabel" ></Label>
+            <Label x:Name="phoneLabel" ></Label>
+          </StackLayout>
+
+        </StackLayout>
+        <Label Text="Route Information" FontAttributes="Bold" FontSize="Large"></Label>
+        <Label x:Name="descriptionLabel"  FontSize="Medium"></Label>
+        <Label x:Name="departureLabel" FontSize="Large"></Label>
+        <Label x:Name="seatsLabel" FontSize="Large"></Label>
+
+        <Button Style="{StaticResource buttonActionStyle}" Text="Show Starting point" Clicked="OnStartingPoint"></Button>
+        <Button Style="{StaticResource buttonActionStyle}" Text="Show Ending point" Clicked="OnEndingPoint"></Button>
+
+        <StackLayout x:Name="usersLayout" HorizontalOptions="FillAndExpand">
+          <Label x:Name="usersLabel" Style="{StaticResource labelBoldStyle}" Text="Users expected"></Label>
+        </StackLayout>
+        <Button x:Name="activateButton" Style="{StaticResource buttonSuccessStyle}" Text="Activate route" Clicked="OnActivate" IsVisible="False"></Button>
+      </StackLayout>
+    </StackLayout>
+
+
+  </ScrollView>
+</ContentPage>
