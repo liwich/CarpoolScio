@@ -120,7 +120,7 @@ namespace Carpool
 
             var position = new Position(latitude, longitude);
 
-            //await Navigation.PushAsync(new MapEndingPoint(position));
+            await Navigation.PushAsync(new MapEndingPoint(position));
         }
 
         private async void OnActivate(object sender, EventArgs e)

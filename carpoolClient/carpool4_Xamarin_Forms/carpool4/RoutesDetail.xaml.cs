@@ -88,7 +88,7 @@ namespace Carpool
 
             var position = new Position(latitude, longitude);
 
-            //await Navigation.PushAsync(new MapStartingPoint(position));
+            await Navigation.PushAsync(new MapStartingPoint(position));
 
         }
 
@@ -99,7 +99,7 @@ namespace Carpool
 
             var position = new Position(latitude, longitude);
 
-            //await Navigation.PushAsync(new MapEndingPoint(position));
+            await Navigation.PushAsync(new MapEndingPoint(position));
         }
 
         private async void OnReserved(object sender, EventArgs e)

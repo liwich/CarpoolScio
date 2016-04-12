@@ -66,23 +66,23 @@ namespace Carpool
             {
                 newRoute = (Route)Application.Current.Properties["route"];
 
-                //if (!string.IsNullOrEmpty(newRoute.From_Latitude))
-                    //startingPointButton.Text = "Change Starting point";
-                //if (!string.IsNullOrEmpty(newRoute.To_Latitude))
-                    //endingPointButton.Text = "Change Ending point";
+                if (!string.IsNullOrEmpty(newRoute.From_Latitude))
+                    startingPointButton.Text = "Change Starting point";
+                if (!string.IsNullOrEmpty(newRoute.To_Latitude))
+                    endingPointButton.Text = "Change Ending point";
             }
         }
 
         public async void OnStartingPoint(object sender, EventArgs e)
         {
             savePoints = true;
-            //await Navigation.PushAsync(new MapStartingPoint());
+            await Navigation.PushAsync(new MapStartingPoint());
         }
 
         public async void OnEndingPoint(object sender, EventArgs e)
         {
             savePoints = true;
-            //await Navigation.PushAsync(new MapEndingPoint());
+            await Navigation.PushAsync(new MapEndingPoint());
         }
 
         public void OnCarPicker(object sender, EventArgs e)
