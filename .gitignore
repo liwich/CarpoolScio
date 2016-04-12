@@ -1,2 +1,4 @@
 bin
 obj
+carpool4_Runtime/.vs/config/applicationhost.config
+*.suo
