@@ -141,7 +141,7 @@ namespace Carpool
 
         private async void MyRoutes(object sende, EventArgs e)
         {
-             await Navigation.PushAsync(new MyRoutes());
+            await Navigation.PushAsync(new MyRoutes());
         }
 
         private async void ProfileDetails(object sender, EventArgs e)
@@ -156,7 +156,7 @@ namespace Carpool
 
         private async void Reservations()
         {
-            // await Navigation.PushAsync(new ReservationsView());
+            await Navigation.PushAsync(new ReservationsView());
         }
     }
 }

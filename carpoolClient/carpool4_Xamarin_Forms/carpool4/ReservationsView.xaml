@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Carpool.ReservationsView"
+             Title="Reservations">
+  <StackLayout Style="{StaticResource contentPageStyle}">
+    <SearchBar x:Name="searchBar" Placeholder="Search Route" TextChanged="OnSearch"></SearchBar>
+    <StackLayout x:Name="errorLayout" HorizontalOptions="FillAndExpand">
+      <Label x:Name="errorLabel" Text="Loading routes" Style="{StaticResource labelBoldStyle}" HorizontalTextAlignment="Center"></Label>
+    </StackLayout>
+    <ListView x:Name="routesListView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="500" RowHeight="100" BackgroundColor="White" SeparatorColor="#009688" IsPullToRefreshEnabled="True" ></ListView>
+  </StackLayout>
+</ContentPage>

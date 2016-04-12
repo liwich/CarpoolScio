@@ -36,6 +36,9 @@
     <Compile Include="MyRoutesDetail.xaml.cs">
       <DependentUpon>MyRoutesDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReservationsView.xaml.cs">
+      <DependentUpon>ReservationsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RoutesDetail.xaml.cs">
       <DependentUpon>RoutesDetail.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="RoutesDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ReservationsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
