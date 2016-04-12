@@ -1,9 +1,10 @@
-﻿using Microsoft.WindowsAzure.MobileServices;
+﻿
+using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace carpool4.Models
@@ -16,8 +17,8 @@ namespace carpool4.Models
 
         public ReservationManager()
         {
-            client = new MobileServiceClient(
-                Constants.ApplicationURL);
+            this.client = new MobileServiceClient(Constants.ApplicationURL);
+            reservationsTable = client.GetTable<Reservation>();
 
         }
 
@@ -92,6 +93,32 @@ namespace carpool4.Models
                 Debug.WriteLine(@"ERROR {0}", e.Message);
             }
 
+        }
+
+
+        public async Task<ObservableCollection<Reservation>> GetTodoItemsAsync(bool syncItems = false)
+        {
+            try
+            {
+#if OFFLINE_SYNC_ENABLED
+                if (syncItems)
+                {
+                    await this.SyncAsync();
+                }
+#endif
+                IEnumerable<Reservation> items = await reservationsTable.ToEnumerableAsync();
+
+                return new ObservableCollection<Reservation>(items);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"Invalid sync operation: {0}", msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(@"Sync error: {0}", e.Message);
+            }
+            return null;
         }
 
     }

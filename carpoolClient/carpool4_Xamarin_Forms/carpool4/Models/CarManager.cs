@@ -15,6 +15,7 @@ namespace carpool4.Models
         public CarManager()
         {
             this.client = new MobileServiceClient(Constants.ApplicationURL);
+            carsTable = client.GetTable<Car>();
         }
 
         public async Task SaveCarAsync(Car car)
