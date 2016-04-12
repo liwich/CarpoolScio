@@ -31,7 +31,7 @@ namespace carpool4
         IMobileServiceTable<TodoItem> todoTable;
 #endif
 
-        private TodoItemManager()
+        public TodoItemManager()
         {
             this.client = new MobileServiceClient(
                 Constants.ApplicationURL);
