@@ -34,19 +34,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ExtMap.cs" />
-    <Compile Include="MapEndingPoint.xaml.cs">
+    <Compile Include="Views\MapEndingPoint.xaml.cs">
       <DependentUpon>MapEndingPoint.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MapStartingPoint.xaml.cs">
+    <Compile Include="Views\MapStartingPoint.xaml.cs">
       <DependentUpon>MapStartingPoint.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyRoutesDetail.xaml.cs">
+    <Compile Include="Views\MyRoutesDetail.xaml.cs">
       <DependentUpon>MyRoutesDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReservationsView.xaml.cs">
+    <Compile Include="Views\ReservationsView.xaml.cs">
       <DependentUpon>ReservationsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RoutesDetail.xaml.cs">
+    <Compile Include="Views\RoutesDetail.xaml.cs">
       <DependentUpon>RoutesDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddCar.xaml.cs">
@@ -202,31 +202,31 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyRoutesDetail.xaml">
+    <EmbeddedResource Include="Views\MyRoutesDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RoutesDetail.xaml">
+    <EmbeddedResource Include="Views\RoutesDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ReservationsView.xaml">
+    <EmbeddedResource Include="Views\ReservationsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MapStartingPoint.xaml">
+    <EmbeddedResource Include="Views\MapStartingPoint.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MapEndingPoint.xaml">
+    <EmbeddedResource Include="Views\MapEndingPoint.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

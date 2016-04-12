@@ -13,10 +13,10 @@ using Gcm.Client;
 namespace carpool4.Droid
 {
 	[Activity (Label = "carpool4.Droid", 
-		Icon = "@drawable/icon", 
+		Icon = "@drawable/ic_launcher", 
 		MainLauncher = true, 
 		ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
-		Theme = "@android:style/Theme.Holo.Light")]
+		Theme = "@style/Theme.Example")]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
 	{
 		protected override void OnCreate (Bundle bundle)
