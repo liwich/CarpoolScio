@@ -43,9 +43,9 @@ namespace carpool4.Droid
 
             createNotification("GcmService Registered...", "The device has been Registered, Tap to View!");
 
-            //var push = TodoItemManager.DefaultManager.CurrentClient.GetPush();
+            var push = TodoItemManager.DefaultManager.CurrentClient.GetPush();
 
-            //MainActivity.CurrentActivity.RunOnUiThread(() => Register(push, null));
+            MainActivity.CurrentActivity.RunOnUiThread(() => Register(push, null));
 
         }
 

@@ -33,7 +33,7 @@ namespace carpool4.Droid
                 // Check to ensure everything's setup right
                 GcmClient.CheckDevice(this);
                 GcmClient.CheckManifest(this);
-
+                instance = this;
                 // Register for push notifications
                 System.Diagnostics.Debug.WriteLine("Registering...");
                 GcmClient.Register(this, PushHandlerBroadcastReceiver.SENDER_IDS);
