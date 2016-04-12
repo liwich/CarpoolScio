@@ -91,7 +91,7 @@ namespace carpool4.Droid
             string message = intent.Extras.GetString("message");
             if (!string.IsNullOrEmpty(message))
             {
-                createNotification("New todo item!", "Todo item: " + message);
+                createNotification("Carpool: ", message);
                 return;
             }
 
