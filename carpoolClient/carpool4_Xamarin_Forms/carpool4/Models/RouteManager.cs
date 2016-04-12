@@ -21,9 +21,6 @@ namespace carpool4.Models
             client = new MobileServiceClient(Constants.ApplicationURL);
             routesTable = client.GetTable<Route>();
         
-            var aa = new Route { Comments = "route1",Depart_Date = DateTime.Now };
-            routesTable.InsertAsync(aa);
-            var aaaaaa = routesTable.ToListAsync();
         }
 
         public async Task SaveRouteAsync(Route route)

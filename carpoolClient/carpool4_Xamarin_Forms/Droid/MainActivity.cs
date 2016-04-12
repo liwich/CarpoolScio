@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Carpool;
 
 namespace carpool4.Droid
 {
@@ -23,7 +24,7 @@ namespace carpool4.Droid
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
-			LoadApplication (new App ());
+			LoadApplication (new AppStart ());
 		}
 	}
 }

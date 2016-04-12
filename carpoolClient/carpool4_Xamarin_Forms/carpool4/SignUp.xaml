@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Carpool.SignUp"
+             Title="Sign Up" BackgroundColor="#004D40">
+
+  <!--<ContentPage.Padding>
+    <OnPlatform x:TypeArguments="Thickness">
+      <OnPlatform.iOS>
+        0,20,0,0
+      </OnPlatform.iOS>
+    </OnPlatform>
+  </ContentPage.Padding>-->
+
+
+  <ScrollView>
+    <StackLayout Style="{StaticResource contentPageStyle}">
+
+
+      <StackLayout Style="{StaticResource stackContent}">
+
+        <Entry x:Name="emailEntry" Placeholder="Email/Username" Keyboard="Email" TextChanged="EmailTextChanged" />
+        <Label x:Name="emailEntryError" Text="User already exists" Style="{StaticResource labelErrorStyle}" IsVisible="False"></Label>
+        <Entry x:Name="passwordEntry" Placeholder="Password"  IsPassword="True"  TextChanged="PasswordTextChanged" />
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+          <Label x:Name="validationLabel" Text="Validating user" Style="{StaticResource labelBoldStyle}"  VerticalOptions="Center" VerticalTextAlignment="Center" IsVisible="False"></Label>
+          <ActivityIndicator x:Name="activityIndicator" Color="White" IsRunning="False"></ActivityIndicator>
+        </StackLayout>
+        <Button x:Name="signUpButton" Text="Sign Up" Style="{StaticResource buttonSuccessStyle}" Clicked="OnSignUp"></Button>
+
+      </StackLayout>
+
+    </StackLayout>
+
+  </ScrollView>
+</ContentPage>

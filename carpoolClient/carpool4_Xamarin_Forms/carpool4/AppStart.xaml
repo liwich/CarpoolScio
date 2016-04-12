@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Carpool.AppStart">
+
+  <Application.Resources>
+    <ResourceDictionary>
+
+      <Style x:Key="contentPageStyle" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="#26A69A"/>
+        <Setter Property="Orientation" Value="Vertical"></Setter>
+      </Style>
+
+      <Style x:Key="stackContent" TargetType="StackLayout">
+        <Setter Property="Orientation" Value="Vertical"></Setter>
+        <Setter Property="Padding" Value="20,50,20,20"></Setter>
+        <Setter Property="Spacing" Value="30"></Setter>
+      </Style>
+
+      <Style TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="TextColor" Value="#00695C" />
+        <Setter Property="PlaceholderColor" Value="#004D40"/>
+        <Setter Property="HeightRequest" Value="42"/>
+      </Style>
+
+      <Style TargetType="Editor">
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="TextColor" Value="#00695C" />
+        <Setter Property="HeightRequest" Value="50"/>
+      </Style>
+
+      <Style TargetType="Picker">
+        <Setter Property="BackgroundColor" Value="White"/>
+      </Style>
+
+      <Style TargetType="SearchBar">
+        <Setter Property="PlaceholderColor" Value="White"/>
+      </Style>
+
+      <Style TargetType="Label">
+        <Setter Property="TextColor" Value="White"/>
+      </Style>
+
+      <Style x:Key="labelDark" TargetType="Label">
+        <Setter Property="TextColor" Value="#004D40"/>
+      </Style>
+
+      <Style x:Key="labelBoldStyle" TargetType="Label">
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="Medium"/>
+      </Style>
+
+      <Style x:Key="labelErrorStyle" TargetType="Label">
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="TextColor" Value="#e53935"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="Medium"/>
+      </Style>
+
+      <Style x:Key="buttonSuccessStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#4CAF50"/>
+        <Setter Property="TextColor" Value="White"/>
+      </Style>
+
+      <Style x:Key="buttonCancelStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#f44336"/>
+        <Setter Property="TextColor" Value="White"/>
+      </Style>
+
+      <Style x:Key="buttonActionStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#009688"/>
+        <Setter Property="TextColor" Value="White"/>
+      </Style>
+
+      <Style x:Key="linkStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="TextColor" Value="#81D4FA"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+      </Style>
+
+      <Style x:Key="listCustomized" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="White"/>
+      </Style>
+
+    </ResourceDictionary>
+  </Application.Resources>
+
+
+</Application>

@@ -19,9 +19,6 @@ namespace carpool4.Models
                 Constants.ApplicationURL);
 
             this.usersTable = client.GetTable<User>();
-            var a = new User { Email = "user1" };
-            usersTable.InsertAsync(a);
-            var aaaaaa = usersTable.ToListAsync();
         }
 
         public async Task<User> GetUserWhere(Expression<Func<User, bool>> linq)

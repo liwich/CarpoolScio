@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Carpool;
 
 namespace carpool4.iOS
 {
@@ -20,7 +21,7 @@ namespace carpool4.iOS
             // For more information, see: http://go.microsoft.com/fwlink/?LinkId=620342
             //SQLitePCL.CurrentPlatform.Init();
 
-			LoadApplication (new App ());
+			LoadApplication (new AppStart ());
 
 			return base.FinishedLaunching (app, options);
 		}

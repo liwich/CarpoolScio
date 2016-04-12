@@ -19,10 +19,6 @@ namespace carpool4.Models
             client = new MobileServiceClient(
                 Constants.ApplicationURL);
 
-            reservationsTable = client.GetTable<Reservation>();
-            var a = new Reservation { Id_Route = "res1" };
-            reservationsTable.InsertAsync(a);
-            var aaaaaa = reservationsTable.ToListAsync();
         }
 
         public async Task SaveReservationAsync(Reservation reservation)

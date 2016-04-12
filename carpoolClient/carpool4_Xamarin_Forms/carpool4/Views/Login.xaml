@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Carpool.Login"
+             >
+
+  <ScrollView>
+    <StackLayout Style="{StaticResource contentPageStyle}">
+
+      <StackLayout BackgroundColor="#004D40" >
+        <Image Source="logo2.png"></Image>
+      </StackLayout>
+      <StackLayout Style="{StaticResource stackContent}">
+        <Entry x:Name="emailEntry" Placeholder="Email" Keyboard="Email">
+          <!--<Entry.Behaviors>
+            <local:EmailValidatorBehavior x:Name="EmailValidatorBehavior"/>
+          </Entry.Behaviors>-->
+        </Entry>
+
+        <Entry x:Name="passwordEntry" Placeholder="Password"  IsPassword="True" />
+
+        <ActivityIndicator x:Name="activityIndicator" IsRunning="False"></ActivityIndicator>
+        <Button x:Name="signInButton" Text="Sign In" Style="{StaticResource buttonSuccessStyle}" Clicked="SignIn" />
+        <!--IsEnabled="{Binding Source={x:Reference EmailValidatorBehavior}, Path=IsValid}"-->
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+
+          <Label Text="No Account?" Style="{StaticResource labelBoldStyle}"></Label>
+
+          <Button x:Name="signUpButton" Text="Sign Up" Style="{StaticResource linkStyle}" Clicked="SignUp"></Button>
+
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+
+
+        </StackLayout>
+      </StackLayout>
+
+    </StackLayout>
+
+  </ScrollView>
+</ContentPage>
