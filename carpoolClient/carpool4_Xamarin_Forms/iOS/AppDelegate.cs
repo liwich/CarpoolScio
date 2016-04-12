@@ -14,8 +14,8 @@ namespace carpool4.iOS
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init ();
-
-			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+            Xamarin.FormsMaps.Init();
+            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
             // IMPORTANT: uncomment this code to enable sync on Xamarin.iOS
             // For more information, see: http://go.microsoft.com/fwlink/?LinkId=620342
