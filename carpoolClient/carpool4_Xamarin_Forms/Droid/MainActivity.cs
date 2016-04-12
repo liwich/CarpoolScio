@@ -23,7 +23,8 @@ namespace carpool4.Droid
 			base.OnCreate (bundle);
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
-			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+            Xamarin.FormsMaps.Init(this, bundle);
+            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 			LoadApplication (new AppStart ());
 		}
 	}
