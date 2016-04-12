@@ -99,7 +99,7 @@ namespace Carpool
                 activityIndicator.IsRunning = true;
                 await UpdateUser(user);
                 activityIndicator.IsRunning = false;
-                //Application.Current.MainPage = new NavigationPage(new Dashboard());
+                Application.Current.MainPage = new NavigationPage(new Dashboard());
             }
 
         }
