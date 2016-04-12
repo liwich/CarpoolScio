@@ -1,6 +1,7 @@
 ﻿using carpool4.Models;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,8 +13,11 @@ namespace Carpool
         private User currentUser;
         UserManager manager;
 
+        public static Profile Instance;
+
         public Profile()
         {
+            Instance = this;
 
             InitializeComponent();
 
@@ -102,6 +106,22 @@ namespace Carpool
                 Application.Current.MainPage = new NavigationPage(new Dashboard());
             }
 
+        }
+
+        void OnCamera(object sender, EventArgs e)
+        {
+
+            IPictureTaker pictureTake =
+            DependencyService.Get<IPictureTaker>();
+
+            pictureTake.SnapPic();
+
+        }
+
+
+        public void ShowImage(byte[] resizedImage)
+        {
+            profileImage.Source = ImageSource.FromStream(() => new MemoryStream(resizedImage));
         }
     }
 }
