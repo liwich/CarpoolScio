@@ -112,7 +112,8 @@ namespace Carpool
                 var newReservation = new Reservation
                 {
                     Id_Route = route.Id,
-                    Id_User = currentUser.Id
+                    Id_User = currentUser.Id,
+                    Id_Owner = route.Id_User
                 };
 
                 await reservationsManager.SaveReservationAsync(newReservation);
@@ -130,7 +131,7 @@ namespace Carpool
             bool answer = await DisplayAlert("Cancel Reservation", "Are you sure?", "Accept", "Cancel");
             if (answer)
             {
-                var reservation = new Reservation { Id_Route = route.Id, Id_User = currentUser.Id };
+                var reservation = new Reservation { Id_Route = route.Id, Id_User = currentUser.Id, Id_Owner = route.Id_User };
                 IsBusy = true;
                 await reservationsManager.DeleteReservationAsync(reservation);
                 IsBusy = false;

@@ -61,7 +61,7 @@ namespace carpool4Service.Controllers
             // Sending the message so that all template registrations that contain "messageParam"
             // will receive the notifications. This includes APNS, GCM, WNS, and MPNS template registrations.
             Dictionary<string, string> templateParams = new Dictionary<string, string>();
-            templateParams["messageParam"] = item.Text + " was added to the list.";
+            templateParams["messageParam"] = "778245330a7a46178cdfffe22ec48166," + item.Text + " was added to the list.";
 
             try
             {

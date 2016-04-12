@@ -13,5 +13,7 @@ namespace carpool4.Models
         public string Id_User { get; set; }
         
         public string Id_Route { get; set; }
+
+        public string Id_Owner { get; set; }
     }
 }

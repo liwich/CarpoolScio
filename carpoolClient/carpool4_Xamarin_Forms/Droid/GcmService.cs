@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using System.Text;
 using System.Linq;
 using carpool4.Droid;
+using Carpool;
 
 
 [assembly: Permission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
@@ -71,8 +72,7 @@ namespace carpool4.Droid
             }
         }
         protected override void OnMessage(Context context, Intent intent)
-        {
-            Log.Info("PushHandlerBroadcastReceiver", "GCM Message Received!");
+        {         
 
             var msg = new StringBuilder();
 
@@ -91,7 +91,14 @@ namespace carpool4.Droid
             string message = intent.Extras.GetString("message");
             if (!string.IsNullOrEmpty(message))
             {
-                createNotification("Carpool: ", message);
+                string[] values = message.Split(',');
+                Debug.WriteLine(AppStart.UserMain.Id.Equals("entra " + values[0]));
+                Debug.WriteLine(AppStart.UserMain.Id);
+                Debug.WriteLine(values[0]);
+                if (AppStart.UserMain.Id.Equals(values[0].ToString().Trim()))
+                {
+                    createNotification("Carpool: ", values[0].ToString().Trim());
+                }
                 return;
             }
 
