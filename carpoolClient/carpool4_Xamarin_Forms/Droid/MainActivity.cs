@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Carpool;
+using Gcm.Client;
 
 namespace carpool4.Droid
 {
@@ -26,7 +27,44 @@ namespace carpool4.Droid
             Xamarin.FormsMaps.Init(this, bundle);
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 			LoadApplication (new AppStart ());
-		}
-	}
+
+            try
+            {
+                // Check to ensure everything's setup right
+                GcmClient.CheckDevice(this);
+                GcmClient.CheckManifest(this);
+
+                // Register for push notifications
+                System.Diagnostics.Debug.WriteLine("Registering...");
+                GcmClient.Register(this, PushHandlerBroadcastReceiver.SENDER_IDS);
+            }
+            catch (Java.Net.MalformedURLException)
+            {
+                CreateAndShowDialog("There was an error creating the Mobile Service. Verify the URL", "Error");
+            }
+            catch (Exception e)
+            {
+                CreateAndShowDialog(e.Message, "Error");
+            }
+        }
+        private void CreateAndShowDialog(String message, String title)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.SetMessage(message);
+            builder.SetTitle(title);
+            builder.Create().Show();
+        }
+        static MainActivity instance = null;
+
+        // Return the current activity instance.
+        public static MainActivity CurrentActivity
+        {
+            get
+            {
+                return instance;
+            }
+        }
+    }
 }
 
