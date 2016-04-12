@@ -23,12 +23,8 @@ namespace Carpool
 
         async Task AddUser(User user)
         {
-            //await manager.SaveUserAsync(user);
-
             User userResponse = await manager.SaveGetUserAsync(user);
-
             Application.Current.Properties["user"] = userResponse;
-
         }
 
         async void OnSignUp(object sender, EventArgs e)
@@ -54,8 +50,8 @@ namespace Carpool
 
                 await AddUser(user);
 
-                //await Navigation.PushModalAsync(new Profile());
-                //await Navigation.PopAsync();
+                await Navigation.PushModalAsync(new Profile());
+                await Navigation.PopAsync();
             }
             else
             {
@@ -99,7 +95,6 @@ namespace Carpool
             {
                 this.passwordEntry.PlaceholderColor = this.passwordEntry.TextColor = Color.FromHex("#00695C");
             }
-            //signUpButton.IsEnabled = password.Length > 0 ? true : false;
         }
     }
 }

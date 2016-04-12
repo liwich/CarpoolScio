@@ -7,7 +7,6 @@ namespace Carpool
 {
     public partial class Login : ContentPage
     {
-        private User currentUser;
         private UserManager usersManager;
 
         public Login()
@@ -36,7 +35,7 @@ namespace Carpool
                 if (userResponse != null && userResponse.Email.Equals(email, StringComparison.Ordinal) && userResponse.Password.Equals(password, StringComparison.Ordinal))
                 {
                     Application.Current.Properties["user"] = userResponse;
-                    //Application.Current.MainPage = new NavigationPage(new Dashboard());
+                    Application.Current.MainPage = new NavigationPage(new Dashboard());
                 }
                 else
                 {
