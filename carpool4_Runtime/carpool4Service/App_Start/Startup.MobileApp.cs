@@ -61,8 +61,8 @@ namespace carpool4Service
 
             List<Car> cars = new List<Car>
             {
-                new Car { Id = Guid.NewGuid().ToString(), color = "3First item" },
-                new Car { Id = Guid.NewGuid().ToString(), color = "2Second item" },
+                new Car { Id = Guid.NewGuid().ToString(), Color = "lFirst item" },
+                new Car { Id = Guid.NewGuid().ToString(), Color = "2Second item" },
             };
             List<Reservation> reservations = new List<Reservation>
             {

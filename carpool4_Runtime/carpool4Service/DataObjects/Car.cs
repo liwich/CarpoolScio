@@ -4,10 +4,10 @@ namespace carpool4Service.DataObjects
 {
     public class Car : EntityData
     {
-        public string color { get; set; }
+        public string Color { get; set; }
 
-        public string id_user { get; set; }
+        public string Id_User { get; set; }
 
-        public string model { get; set; }
+        public string Model { get; set; } 
     }
 }
