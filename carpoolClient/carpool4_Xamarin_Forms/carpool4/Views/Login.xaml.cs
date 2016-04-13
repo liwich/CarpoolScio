@@ -34,6 +34,7 @@ namespace Carpool
 
                 if (userResponse != null && userResponse.Email.Equals(email, StringComparison.Ordinal) && userResponse.Password.Equals(password, StringComparison.Ordinal))
                 {
+                    AppStart.UserMain = userResponse;
                     Application.Current.Properties["user"] = userResponse;
                     Application.Current.MainPage = new NavigationPage(new Dashboard());
                 }

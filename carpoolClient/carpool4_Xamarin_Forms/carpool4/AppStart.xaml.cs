@@ -13,8 +13,7 @@ namespace Carpool
         public AppStart()
         {
             UserMain = new User();
-            UserMain.Id = "778245330a7a46178cdfffe22ec48164";
-
+            UserMain.Id = "";
 
             InitializeComponent();
             var loginPage = new NavigationPage(new Login());
