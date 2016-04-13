@@ -33,6 +33,18 @@ namespace carpool4
 
         [Version]
         public string Version { get; set; }
-	}
+
+        [JsonProperty(PropertyName = "containerName")]
+        public string ContainerName { get; set; }
+
+        [JsonProperty(PropertyName = "resourceName")]
+        public string ResourceName { get; set; }
+
+        [JsonProperty(PropertyName = "sasQueryString")]
+        public string SasQueryString { get; set; }
+
+        [JsonProperty(PropertyName = "imageUri")]
+        public string ImageUri { get; set; }
+    }
 }
 
