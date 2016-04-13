@@ -13,7 +13,8 @@ namespace carpool4.iOS
 	{
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			global::Xamarin.Forms.Forms.Init ();
+            SetStyles();
+            global::Xamarin.Forms.Forms.Init ();
             Xamarin.FormsMaps.Init();
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
@@ -25,6 +26,19 @@ namespace carpool4.iOS
 
 			return base.FinishedLaunching (app, options);
 		}
-	}
+
+        static void SetStyles()
+        {
+            UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(0, 77, 64);
+            UINavigationBar.Appearance.TintColor = UIColor.White;
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes
+            {
+                TextColor = UIColor.White
+            });
+
+            UIToolbar.Appearance.BarTintColor = UIColor.FromRGB(38, 166, 154);
+
+        }
+    }
 }
 

@@ -37,6 +37,7 @@ namespace carpool4.Droid
                 // Register for push notifications
                 System.Diagnostics.Debug.WriteLine("Registering...");
                 GcmClient.Register(this, PushHandlerBroadcastReceiver.SENDER_IDS);
+                
             }
             catch (Java.Net.MalformedURLException)
             {

@@ -97,7 +97,7 @@ namespace carpool4.Droid
                 Debug.WriteLine(values[0]);
                 if (AppStart.UserMain.Id.Equals(values[0].ToString().Trim()))
                 {
-                    createNotification("Carpool: ", values[0].ToString().Trim());
+                    createNotification("Carpool: ","Someone reserved in your route");
                 }
                 return;
             }
