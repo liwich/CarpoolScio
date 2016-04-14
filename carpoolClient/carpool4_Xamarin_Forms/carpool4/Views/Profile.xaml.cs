@@ -1,6 +1,8 @@
-﻿using carpool4.Models;
+﻿using carpool4;
+using carpool4.Models;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,8 +14,11 @@ namespace Carpool
         private User currentUser;
         UserManager manager;
 
+        public static Profile Instance;
+
         public Profile()
         {
+            Instance = this;
 
             InitializeComponent();
 
@@ -103,5 +108,26 @@ namespace Carpool
             }
 
         }
+
+        async void OnCamera(object sender, EventArgs e)
+        {
+            IPictureTaker pictureTake =
+            DependencyService.Get<IPictureTaker>();
+
+            pictureTake.SnapPic();
+        }
+
+
+        public async void ShowImage(byte[] resizedImage, Stream stream)
+        {
+            profileImage.Source=ImageSource.FromStream(()=>new MemoryStream(resizedImage));
+            profileImage.Rotation = 90;
+
+            TodoItem item = new TodoItem { Name = "Awesome item", ContainerName = "images" ,ResourceName = "image.jpg"};
+
+            TodoItemManager obj= new TodoItemManager();
+            await obj.InsertTodoItem(item,stream);
+        }
+
     }
 }

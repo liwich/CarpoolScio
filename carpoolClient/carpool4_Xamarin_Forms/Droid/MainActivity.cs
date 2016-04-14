@@ -98,7 +98,7 @@ namespace carpool4.Droid
 
                 byte[] resizedImage = MainActivity.ResizeImageAndroid(imageData, 400, 400);
 
-                Profile.Instance.ShowImage(resizedImage);
+                Profile.Instance.ShowImage(resizedImage, stream);
             }
         }
 

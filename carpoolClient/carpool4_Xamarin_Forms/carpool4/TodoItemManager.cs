@@ -8,11 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
-
+using Microsoft.WindowsAzure.Storage.Auth;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System.IO;
 #if OFFLINE_SYNC_ENABLED
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Microsoft.WindowsAzure.MobileServices.Sync;
@@ -47,8 +47,6 @@ namespace carpool4
 #else
             this.todoTable = client.GetTable<TodoItem>();
             
-            TodoItem item = new TodoItem { Name = "Awesome item", ImageUri = "https://www.xamarin.com/content/images/pages/branding/assets/xamarin-logo.png", ContainerName = "images"};
-            todoTable.InsertAsync(item);
 #endif
         }
 
@@ -113,6 +111,47 @@ namespace carpool4
             }
         }
 
+        public async Task InsertTodoItem(TodoItem todoItem, Stream blob)
+        {
+            string errorString = string.Empty;
+
+            // Set blob properties of TodoItem.
+            todoItem.ContainerName = "images";
+
+            // Use a unigue GUID to avoid collisions.
+            //todoItem.ResourceName = Guid.NewGuid().ToString();
+
+
+            // Send the item to be inserted. When blob properties are set this
+            // generates an SAS in the response.
+            await todoTable.InsertAsync(todoItem);
+
+            // If we have a returned SAS, then upload the blob.
+            if (!string.IsNullOrEmpty(todoItem.SasQueryString))
+            {
+                // Get the URI generated that contains the SAS 
+                // and extract the storage credentials.
+                StorageCredentials cred = new StorageCredentials(todoItem.SasQueryString);
+                var imageUri = new Uri(todoItem.ImageUri);
+
+                // Instantiate a Blob store container based on the info in the returned item.
+                CloudBlobContainer container = new CloudBlobContainer(
+                    new Uri(string.Format("https://{0}/{1}",
+                        imageUri.Host, todoItem.ContainerName)), cred);
+
+                //// Get the new image as a stream.
+
+                // Upload the new image as a BLOB from the stream.
+                CloudBlockBlob blobFromSASCredential =
+                    container.GetBlockBlobReference(todoItem.ResourceName);
+                await blobFromSASCredential.UploadFromStreamAsync(blob);
+
+            }
+
+        }
+
+
+
 #if OFFLINE_SYNC_ENABLED
         public async Task SyncAsync()
         {
@@ -158,5 +197,10 @@ namespace carpool4
             }
         }
 #endif
+
+
     }
+
+
+
 }
