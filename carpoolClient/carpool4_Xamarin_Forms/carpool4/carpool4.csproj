@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ExtMap.cs" />
+    <Compile Include="IPictureTaker.cs" />
     <Compile Include="Views\MapEndingPoint.xaml.cs">
       <DependentUpon>MapEndingPoint.xaml</DependentUpon>
     </Compile>
