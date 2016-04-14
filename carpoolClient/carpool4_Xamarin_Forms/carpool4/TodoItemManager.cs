@@ -46,7 +46,8 @@ namespace carpool4
             this.todoTable = client.GetSyncTable<TodoItem>();
 #else
             this.todoTable = client.GetTable<TodoItem>();
-            TodoItem item = new TodoItem { Name = "Awesome item" };
+            
+            TodoItem item = new TodoItem { Name = "Awesome item", ImageUri = "https://www.xamarin.com/content/images/pages/branding/assets/xamarin-logo.png", ContainerName = "images"};
             todoTable.InsertAsync(item);
 #endif
         }

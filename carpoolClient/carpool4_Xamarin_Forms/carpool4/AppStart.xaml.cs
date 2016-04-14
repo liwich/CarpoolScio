@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using carpool4;
 using carpool4.Models;
 using Xamarin.Forms;
 using Application = Xamarin.Forms.Application;
@@ -15,6 +16,7 @@ namespace Carpool
         private List<Reservation> lr; 
         public AppStart()
         {
+            TodoItemManager obj= new TodoItemManager();
             UserMain = new User();
             UserMain.Id = "";
 
