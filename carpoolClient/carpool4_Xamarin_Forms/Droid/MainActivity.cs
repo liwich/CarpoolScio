@@ -13,21 +13,21 @@ using Android.Graphics;
 [assembly: Dependency(typeof(carpool4.Droid.MainActivity))]
 namespace carpool4.Droid
 {
-	[Activity (Label = "carpool4.Droid", 
-		Icon = "@drawable/ic_launcher", 
-		MainLauncher = true, 
-		ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
-		Theme = "@style/Theme.Example")]
-	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity, IPictureTaker
-	{
-		protected override void OnCreate (Bundle bundle)
-		{
-			base.OnCreate (bundle);
+    [Activity(Label = "carpool4.Droid",
+        Icon = "@drawable/ic_launcher",
+        MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
+        Theme = "@style/Theme.Example")]
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity, IPictureTaker
+    {
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
 
-			global::Xamarin.Forms.Forms.Init (this, bundle);
+            global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.FormsMaps.Init(this, bundle);
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
-			LoadApplication (new AppStart ());
+            LoadApplication(new AppStart());
 
             try
             {
@@ -38,7 +38,7 @@ namespace carpool4.Droid
                 // Register for push notifications
                 System.Diagnostics.Debug.WriteLine("Registering...");
                 GcmClient.Register(this, PushHandlerBroadcastReceiver.SENDER_IDS);
-                
+
             }
             catch (Java.Net.MalformedURLException)
             {
@@ -106,13 +106,19 @@ namespace carpool4.Droid
         {
             // Load the bitmap
             Bitmap originalImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
-            Bitmap resizedImage = Bitmap.CreateScaledBitmap(originalImage, originalImage.Width / 2, originalImage.Height / 2, false);
+            Bitmap resizedImage = Bitmap.CreateScaledBitmap(originalImage, originalImage.Width / 3, originalImage.Height / 3, false);
+            Matrix matrix = new Matrix();
 
+            matrix.PostRotate(90);
+
+            resizedImage = Bitmap.CreateBitmap(resizedImage, 0, 0, resizedImage.Width, resizedImage.Height, matrix,
+                true);
             using (MemoryStream ms = new MemoryStream())
             {
                 resizedImage.Compress(Bitmap.CompressFormat.Jpeg, 100, ms);
                 return ms.ToArray();
             }
+
         }
 
         static MainActivity instance = null;

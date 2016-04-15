@@ -123,30 +123,9 @@ namespace Carpool
         public async void ShowImage(byte[] resizedImage, Stream stream)
         {
             profileImage.Source = ImageSource.FromStream(() => new MemoryStream(resizedImage));
-            profileImage.Rotation = 90;
-
-            Profile.UploadPhoto(resizedImage, currentUser.Id);
+              AzureStorage.UploadPhoto(resizedImage, currentUser.Id);
         }
 
-        public static string UploadPhoto(byte[] photobytes, string photoName)
-        {
-            // define your azure cloud account
-            CloudStorageAccount account = CloudStorageAccount.Parse(Constants.connectionString);
-            // intilaize a client for the created account
-            CloudBlobClient client = account.CreateCloudBlobClient();
-            // intialize the container
-            CloudBlobContainer container = client.GetContainerReference(Constants.containerName);
-            // create the container if doesn't exist
-            container.CreateIfNotExists();
-            // set public permission for your blob to be able to be used by everyone 
-            BlobContainerPermissions containerPermissions = new BlobContainerPermissions() { PublicAccess = BlobContainerPublicAccessType.Blob };
-            container.SetPermissions(containerPermissions);
-            // set the photo path ... note the photo name can be either "name.jpg" or it can has a virtual path like "pics/folder/name.jpg"
-            CloudBlockBlob photo = container.GetBlockBlobReference(photoName);
-            // start uploading
-            photo.UploadFromByteArray(photobytes, 0, photobytes.Length);
-            // return the url of the photo after uploading
-            return photo.Uri.ToString();
-        }
+       
     }
 }
