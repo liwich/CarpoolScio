@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Diagnostics;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
@@ -34,15 +36,25 @@ namespace carpool4
             return photo.Uri.ToString();
         }
 
-        public static byte[] DownloadPhoto(string photoName)
+        public static Uri DownloadPhoto(string photoName)
         {
             CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
             CloudBlobClient client = account.CreateCloudBlobClient();
             CloudBlobContainer container = client.GetContainerReference(containerName);
             CloudBlockBlob photo = container.GetBlockBlobReference(photoName);
-            byte[] photobytes = null;
-            photo.DownloadToByteArray(photobytes, 0);
-            return photobytes;
+           Uri photoUri = null;
+            try
+            {
+                //photo.DownloadToByteArray(photobytes, 0);
+                photoUri = photo.Uri;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
+
+            return photoUri;
         }
     }
 }

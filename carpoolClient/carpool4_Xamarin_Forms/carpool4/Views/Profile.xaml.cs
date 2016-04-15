@@ -63,6 +63,12 @@ namespace Carpool
                     genderPicker.BackgroundColor = Color.FromHex("#00897B");
                 }
 
+                Uri photoUri = AzureStorage.DownloadPhoto(currentUser.Id);
+                if (photoUri != null)
+                {
+                    profileImage.Source=ImageSource.FromUri(photoUri);
+                }
+
             }
         }
 
