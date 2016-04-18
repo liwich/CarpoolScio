@@ -33,9 +33,10 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AzureStorage.cs" />
+    <Compile Include="Azure\AzureStorage.cs" />
     <Compile Include="ExtMap.cs" />
     <Compile Include="IPictureTaker.cs" />
+    <Compile Include="Converters\StringToUriConverter.cs" />
     <Compile Include="Views\MapEndingPoint.xaml.cs">
       <DependentUpon>MapEndingPoint.xaml</DependentUpon>
     </Compile>

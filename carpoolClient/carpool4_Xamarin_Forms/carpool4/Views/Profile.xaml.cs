@@ -29,7 +29,7 @@ namespace Carpool
             manager = new UserManager();
             currentUser = (User)Application.Current.Properties["user"];
 
-            loadData();
+            LoadData();
 
             genderPicker.SelectedIndexChanged += (sender, args) =>
             {
@@ -39,7 +39,7 @@ namespace Carpool
         }
 
 
-        void loadData()
+        void LoadData()
         {
             string[] genders = { "Male", "Female" };
 
@@ -55,8 +55,6 @@ namespace Carpool
                 if (!string.IsNullOrEmpty(currentUser.Phone))
                     phoneEntry.Text = currentUser.Phone;
 
-                Debug.WriteLine(currentUser.Gender);
-
                 if (!string.IsNullOrEmpty(currentUser.Gender))
                 {
                     genderPicker.SelectedIndex = Array.IndexOf(genders, currentUser.Gender);
@@ -66,7 +64,11 @@ namespace Carpool
                 Uri photoUri = AzureStorage.DownloadPhoto(currentUser.Id);
                 if (photoUri != null)
                 {
-                    profileImage.Source=ImageSource.FromUri(photoUri);
+                    profileImage.Source = ImageSource.FromUri(photoUri);
+                }
+                else
+                {
+                    profileImage.Source=ImageSource.FromFile("profile.jpg");
                 }
 
             }
@@ -129,9 +131,18 @@ namespace Carpool
         public async void ShowImage(byte[] resizedImage, Stream stream)
         {
             profileImage.Source = ImageSource.FromStream(() => new MemoryStream(resizedImage));
-              AzureStorage.UploadPhoto(resizedImage, currentUser.Id);
+
+            AzureStorage.UploadPhoto(resizedImage, currentUser.Id);
         }
 
-       
+        async void OnFile(object sender, EventArgs e)
+        {
+            IPictureTaker pictureTake =
+            DependencyService.Get<IPictureTaker>();
+
+            pictureTake.SelectPic();
+        }
+
+
     }
 }

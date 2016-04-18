@@ -58,24 +58,7 @@ namespace carpool4.Droid
             builder.Create().Show();
         }
 
-        public void SnapPic()
-        {
-            var activity = Forms.Context as Activity;
-
-            var picker = new MediaPicker(activity);
-
-            //var intent = picker.GetPickPhotoUI();
-
-            var intent = picker.GetTakePhotoUI(new StoreCameraMediaOptions
-            {
-                Directory = "Carpool",
-                Name = "user.jpg"
-            });
-
-            activity.StartActivityForResult(intent, 1);
-        }
-
-
+        
         protected override async void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             if (resultCode == Result.Canceled)
@@ -119,6 +102,33 @@ namespace carpool4.Droid
                 return ms.ToArray();
             }
 
+        }
+
+        public void SelectPic()
+        {
+            var activity = Forms.Context as Activity;
+
+            var picker = new MediaPicker(activity);
+
+            var intent = picker.GetPickPhotoUI();
+
+            activity.StartActivityForResult(intent, 1);
+        }
+
+
+        public void SnapPic()
+        {
+            var activity = Forms.Context as Activity;
+
+            var picker = new MediaPicker(activity);
+
+            var intent = picker.GetTakePhotoUI(new StoreCameraMediaOptions
+            {
+                Directory = "Carpool",
+                Name = "user.jpg"
+            });
+
+            activity.StartActivityForResult(intent, 1);
         }
 
         static MainActivity instance = null;
