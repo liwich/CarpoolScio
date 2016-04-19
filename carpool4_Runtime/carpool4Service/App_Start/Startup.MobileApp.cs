@@ -59,47 +59,47 @@ namespace carpool4Service
                 new TodoItem { Id = Guid.NewGuid().ToString(), Text = "2Second item", Complete = false },
             };
 
-            List<Car> cars = new List<Car>
-            {
-                new Car { Id = Guid.NewGuid().ToString(), Color = "lFirst item" },
-                new Car { Id = Guid.NewGuid().ToString(), Color = "2Second item" },
-            };
-            List<Reservation> reservations = new List<Reservation>
-            {
-                new Reservation { Id = Guid.NewGuid().ToString()},
-                new Reservation { Id = Guid.NewGuid().ToString()},
-            };
+            //List<Car> cars = new List<Car>
+            //{
+            //    new Car { Id = Guid.NewGuid().ToString(), Color = "lFirst item" },
+            //    new Car { Id = Guid.NewGuid().ToString(), Color = "2Second item" },
+            //};
+            //List<Reservation> reservations = new List<Reservation>
+            //{
+            //    new Reservation { Id = Guid.NewGuid().ToString()},
+            //    new Reservation { Id = Guid.NewGuid().ToString()},
+            //};
             //List<Route> routes = new List<Route>
             //{
             //    new Route { Id = Guid.NewGuid().ToString()},
             //    new Route { Id = Guid.NewGuid().ToString()},
             //};
-            List<User> users = new List<User>
-            {
-                new User { Id = Guid.NewGuid().ToString()},
-                new User { Id = Guid.NewGuid().ToString()},
-            };
-
-            foreach (TodoItem todoItem in todoItems)
-            {
-                context.Set<TodoItem>().Add(todoItem);
-            }
-            foreach (Car car in cars)
-            {
-                context.Set<Car>().Add(car);
-            }
-            foreach (Reservation reservation in reservations)
-            {
-                context.Set<Reservation>().Add(reservation);
-            }
-            //foreach (Route route in routes)
+            //List<User> users = new List<User>
             //{
-            //    context.Set<Route>().Add(route);
+            //    new User { Id = Guid.NewGuid().ToString()},
+            //    new User { Id = Guid.NewGuid().ToString()},
+            //};
+
+            //foreach (TodoItem todoItem in todoItems)
+            //{
+            //    context.Set<TodoItem>().Add(todoItem);
             //}
-            foreach (User user in users)
-            {
-                context.Set<User>().Add(user);
-            }
+            //foreach (Car car in cars)
+            //{
+            //    context.Set<Car>().Add(car);
+            //}
+            //foreach (Reservation reservation in reservations)
+            //{
+            //    context.Set<Reservation>().Add(reservation);
+            //}
+            ////foreach (Route route in routes)
+            ////{
+            ////    context.Set<Route>().Add(route);
+            ////}
+            //foreach (User user in users)
+            //{
+            //    context.Set<User>().Add(user);
+            //}
 
 
             base.Seed(context);

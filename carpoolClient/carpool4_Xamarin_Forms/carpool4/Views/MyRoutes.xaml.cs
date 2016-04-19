@@ -12,13 +12,21 @@ namespace Carpool
         private User currentUser;
         private List<Route> routesList;
         private RouteManager routeManager;
-
+        private List<User> userList;
+        private IEnumerable<UserRoute> usersRoutes; 
+        
         public MyRoutes()
         {
             routesList = new List<Route>();
             routeManager = new RouteManager();
             InitializeComponent();
             currentUser = (User)Application.Current.Properties["user"];
+
+            userList = new List<User>();
+            userList.Add(currentUser);
+
+
+
             routesListView.ItemTemplate = new DataTemplate(typeof(RoutesCell));
             routesListView.Refreshing += RoutesListView_Refreshing;
             routesListView.ItemTapped += RoutesListView_ItemTapped;
@@ -26,8 +34,8 @@ namespace Carpool
 
         private async void RoutesListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var route = e.Item as Route;
-            await Navigation.PushAsync(new MyRoutesDetail(route));
+            var userRoute = e.Item as UserRoute;
+            await Navigation.PushAsync(new MyRoutesDetail(userRoute.IdRoute));
         }
 
         private void RoutesListView_Refreshing(object sender, EventArgs e)
@@ -55,7 +63,11 @@ namespace Carpool
             }
             else
             {
-                routesListView.ItemsSource = routesList;
+
+                usersRoutes = from r in routesList
+                              join u in userList on r.Id_User equals u.Id
+                              select new UserRoute(){ IdRoute = r.Id, ResourceName = u.ResourceName, From = r.From, To = r.To };
+                routesListView.ItemsSource = usersRoutes;
             }
 
             routesListView.IsRefreshing = false;
@@ -76,11 +88,15 @@ namespace Carpool
         {
             if (string.IsNullOrWhiteSpace(e.NewTextValue))
             {
-                routesListView.ItemsSource = routesList;
+                routesListView.ItemsSource = usersRoutes;
             }
             else
             {
-                routesListView.ItemsSource = routesList.Where(route => (route.From).ToLower().Contains(e.NewTextValue.ToLower()) || (route.To).ToLower().Contains(e.NewTextValue.ToLower()));
+                usersRoutes = from r in routesList
+                              join u in userList on r.Id_User equals u.Id
+                              where (r.From.ToLower().Contains(e.NewTextValue.ToLower())||r.To.ToLower().Contains(e.NewTextValue.ToLower()))
+                              select new UserRoute() { IdRoute = r.Id, ResourceName = u.ResourceName, From = r.From, To = r.To };
+                routesListView.ItemsSource = usersRoutes;
             }
         }
     }

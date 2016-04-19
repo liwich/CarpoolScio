@@ -15,9 +15,8 @@ namespace carpool4Service.DataObjects
         public string Gender { get; set; }
 
         public string Phone { get; set; }
-        public string containerName { get; set; }
-        public string resourceName { get; set; }
-        public string sasQueryString { get; set; }
-        public string imageUri { get; set; }
+        
+        public string ResourceName { get; set; }
+        
     }
 }

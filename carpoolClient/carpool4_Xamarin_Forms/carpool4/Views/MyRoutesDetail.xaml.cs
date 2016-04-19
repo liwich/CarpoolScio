@@ -22,23 +22,37 @@ namespace Carpool
         private List<Reservation> reservationResult;
         private List<User> usersList;
 
-        public MyRoutesDetail(Route route)
+        public MyRoutesDetail(string routeId)
         {
-            this.route = route;
-            usersList = new List<User>();
-            currentUser = (User)Application.Current.Properties["user"];
             reservationsManager = new ReservationManager();
             routeManager = new RouteManager();
+            usersManager = new UserManager();
             reservationResult = new List<Reservation>();
+            usersList = new List<User>();
+            currentUser = (User)Application.Current.Properties["user"];
+
+            
+            
+            
             InitializeComponent();
 
             this.IsBusy = true;
+
+            LoadRouteData(routeId);
+
+
+            
+        }
+
+
+        private async void LoadRouteData(string routeId)
+        {
+            route = await routeManager.GetRouteWhere(route => route.Id == routeId);
+
             userRoute = new User
             {
                 Id = this.route.Id_User
             };
-
-            usersManager = new UserManager();
 
             this.LoadData();
         }

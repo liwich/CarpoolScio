@@ -87,8 +87,8 @@ namespace Carpool
 
         private async void RoutesListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var route = e.Item as Route;
-            await Navigation.PushAsync(new RoutesDetail(route));
+            var userRoute = e.Item as UserRoute;
+            await Navigation.PushAsync(new RoutesDetail(userRoute.IdRoute));
         }
 
         public void OnSearch(object sender, TextChangedEventArgs e)

@@ -21,6 +21,26 @@ namespace carpool4.Models
             this.usersTable = client.GetTable<User>();
         }
 
+
+        public async Task<List<User>> GetUsersWhere(Expression<Func<User, bool>> linq)
+        {
+            try
+            {
+                List<User> newUser = await usersTable.Where(linq).ToListAsync();
+                return newUser;
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine(@"INVALID {0}", msioe.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(@"ERROR {0}", e.Message);
+            }
+            return null;
+        }
+
+
         public async Task<User> GetUserWhere(Expression<Func<User, bool>> linq)
         {
             try
@@ -36,7 +56,6 @@ namespace carpool4.Models
             {
                 Debug.WriteLine(@"ERROR {0}", e.Message);
             }
-
             return null;
         }
 

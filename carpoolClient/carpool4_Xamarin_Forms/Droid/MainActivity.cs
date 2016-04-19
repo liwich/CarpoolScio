@@ -57,7 +57,6 @@ namespace carpool4.Droid
             builder.SetTitle(title);
             builder.Create().Show();
         }
-
         
         protected override async void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
@@ -82,6 +81,8 @@ namespace carpool4.Droid
                 byte[] resizedImage = MainActivity.ResizeImageAndroid(imageData, 400, 400);
 
                 Profile.Instance.ShowImage(resizedImage, stream);
+
+                GC.Collect();
             }
         }
 
@@ -99,6 +100,7 @@ namespace carpool4.Droid
             using (MemoryStream ms = new MemoryStream())
             {
                 resizedImage.Compress(Bitmap.CompressFormat.Jpeg, 100, ms);
+
                 return ms.ToArray();
             }
 

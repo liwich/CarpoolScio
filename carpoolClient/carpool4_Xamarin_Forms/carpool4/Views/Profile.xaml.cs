@@ -16,6 +16,9 @@ namespace Carpool
 
         private User currentUser;
         UserManager manager;
+        private byte[] profileImageBytes;
+        private string oldResourceName;
+        private string newResourceName;
 
         public static Profile Instance;
 
@@ -23,11 +26,18 @@ namespace Carpool
         {
             Instance = this;
 
-            InitializeComponent();
+            profileImageBytes = new byte[0];
 
+            InitializeComponent();
 
             manager = new UserManager();
             currentUser = (User)Application.Current.Properties["user"];
+
+
+            if (!string.IsNullOrEmpty(currentUser.ResourceName))
+            {
+                oldResourceName = currentUser.ResourceName;
+            }
 
             LoadData();
 
@@ -42,6 +52,8 @@ namespace Carpool
         void LoadData()
         {
             string[] genders = { "Male", "Female" };
+
+            Uri photoUri = null;
 
             if (currentUser != null)
             {
@@ -61,16 +73,18 @@ namespace Carpool
                     genderPicker.BackgroundColor = Color.FromHex("#00897B");
                 }
 
-                Uri photoUri = AzureStorage.DownloadPhoto(currentUser.Id);
-                if (photoUri != null)
+                if (!string.IsNullOrEmpty(currentUser.ResourceName))
                 {
-                    profileImage.Source = ImageSource.FromUri(photoUri);
+                    photoUri = AzureStorage.DownloadPhoto(currentUser.ResourceName);
+                    if (photoUri != null)
+                    {
+                        profileImage.Source = ImageSource.FromUri(photoUri);
+                    }
+                    else
+                    {
+                        profileImage.Source = ImageSource.FromFile("profile.jpg");
+                    }
                 }
-                else
-                {
-                    profileImage.Source=ImageSource.FromFile("profile.jpg");
-                }
-
             }
         }
 
@@ -101,6 +115,11 @@ namespace Carpool
             }
             else
             {
+                if (string.IsNullOrEmpty(newResourceName))
+                {
+                    newResourceName = oldResourceName;
+                }
+
                 var user = new User
                 {
                     Id = currentUser.Id,
@@ -109,10 +128,21 @@ namespace Carpool
                     Name = name + "",
                     Age = age,
                     Phone = phone + "",
-                    Gender = genderSelected + ""
+                    Gender = genderSelected + "",
+                    ResourceName = newResourceName
                 };
 
                 activityIndicator.IsRunning = true;
+
+                if (profileImageBytes.Length > 0)
+                {
+                    AzureStorage.UploadPhoto(profileImageBytes, newResourceName);
+                    if (!string.IsNullOrEmpty(oldResourceName))
+                    {
+                        AzureStorage.DeletePhoto(oldResourceName);
+                    }
+                }    
+
                 await UpdateUser(user);
                 activityIndicator.IsRunning = false;
                 Application.Current.MainPage = new NavigationPage(new Dashboard());
@@ -131,8 +161,8 @@ namespace Carpool
         public async void ShowImage(byte[] resizedImage, Stream stream)
         {
             profileImage.Source = ImageSource.FromStream(() => new MemoryStream(resizedImage));
-
-            AzureStorage.UploadPhoto(resizedImage, currentUser.Id);
+            newResourceName = Guid.NewGuid().ToString();
+            this.profileImageBytes = resizedImage;
         }
 
         async void OnFile(object sender, EventArgs e)
@@ -142,7 +172,6 @@ namespace Carpool
 
             pictureTake.SelectPic();
         }
-
-
+        
     }
 }

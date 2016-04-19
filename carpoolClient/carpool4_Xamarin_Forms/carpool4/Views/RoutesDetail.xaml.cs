@@ -9,28 +9,35 @@ namespace Carpool
     public partial class RoutesDetail : ContentPage
     {
         private UserManager usersManager;
+        private RouteManager routeManager;
         private User userRoute;
         private Route route;
         private ReservationManager reservationsManager;
         private User currentUser;
 
-        public RoutesDetail(Route route)
+        public RoutesDetail(string routeId)
         {
             InitializeComponent();
-            this.route = route;
+            usersManager = new UserManager();
+            reservationsManager = new ReservationManager();
+            currentUser = (User)Application.Current.Properties["user"];
 
+            routeManager = new RouteManager();
+
+            LoadRouteData(routeId);
+        }
+
+        private async void LoadRouteData(string routeId)
+        {
+            route = await routeManager.GetRouteWhere(route => route.Id == routeId);
             userRoute = new User
             {
                 Id = route.Id_User
             };
 
-            usersManager = new UserManager();
-            reservationsManager = new ReservationManager();
-            currentUser = (User)Application.Current.Properties["user"];
 
             this.LoadReservation();
             this.LoadData();
-
         }
 
         private async void LoadData()

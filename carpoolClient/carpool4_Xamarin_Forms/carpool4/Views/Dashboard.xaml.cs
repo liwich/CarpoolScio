@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace Carpool
@@ -15,12 +16,17 @@ namespace Carpool
         private List<Reservation> reservationsList;
         private ReservationManager reservationManager;
         private ToolbarItem reservationsButton;
+        private List<User> userList;
+        private UserManager usersManager;
+        private IEnumerable<UserRoute> usersRoutes;
 
         public Dashboard()
         {
             InitializeComponent();
 
             currentUser = (User)Application.Current.Properties["user"];
+            usersManager=new UserManager();
+            userList = new List<User>();
 
             routesList = new List<Route>();
             routeManager = new RouteManager();
@@ -47,6 +53,9 @@ namespace Carpool
 
         private async void LoadRoutesList()
         {
+            userList =await usersManager.GetUsersWhere(user => user.Id != currentUser.Id);
+
+
             reservationsList = new List<Reservation>();
             routesListView.IsRefreshing = true;
             routesList = await routeManager.ListRoutesWhere(route => route.Id_User != currentUser.Id && route.Depart_Date > DateTime.Now);
@@ -79,7 +88,12 @@ namespace Carpool
                 errorLayout.IsVisible = true;
                 routesListView.BackgroundColor = Color.FromHex("#009688");
             }
-            routesListView.ItemsSource = routesList;
+
+            usersRoutes = from r in routesList
+                          join u in userList on r.Id_User equals u.Id
+                          select new UserRoute{ IdRoute = r.Id, ResourceName = u.ResourceName, From = r.From, To = r.To };
+
+            routesListView.ItemsSource = usersRoutes;
 
             if (reservationsList.Count > 0)
             {
@@ -119,21 +133,24 @@ namespace Carpool
 
         private async void RoutesListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var route = e.Item as Route;
-            await Navigation.PushAsync(new RoutesDetail(route));
+            var userRoute = e.Item as UserRoute;
+            await Navigation.PushAsync(new RoutesDetail(userRoute.IdRoute));
         }
 
         private void OnSearch(object sender, TextChangedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(e.NewTextValue))
             {
-                routesListView.ItemsSource =
-                    routesList.Where(
-                        route => route.From.ToLower().Contains(e.NewTextValue.ToLower()) || route.To.ToLower().Contains(e.NewTextValue.ToLower()));
+
+                usersRoutes = from r in routesList
+                              join u in userList on r.Id_User equals u.Id
+                              where (r.From.ToLower().Contains(e.NewTextValue.ToLower()) || r.To.ToLower().Contains(e.NewTextValue.ToLower()))
+                              select new UserRoute(){IdRoute=r.Id, ResourceName = u.ResourceName, From = r.From, To = r.To };
+                routesListView.ItemsSource = usersRoutes;
             }
             else
             {
-                routesListView.ItemsSource = routesList;
+                routesListView.ItemsSource = usersRoutes;
             }
         }
 
