@@ -9,7 +9,7 @@
         <Label Text="Driver Profile" FontAttributes="Bold" FontSize="Large"></Label>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
-          <Image Source="profile.jpg" WidthRequest="100"></Image>
+          <Image x:Name="profileImage" Source="profile.jpg" Aspect="AspectFill" WidthRequest="150" HeightRequest="150"></Image>
           <StackLayout Orientation="Vertical" Padding="15,0,0,0">
             <Label x:Name="nameLabel" FontSize="Large" ></Label>
             <Label x:Name="ageLabel" ></Label>

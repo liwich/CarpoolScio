@@ -1,6 +1,7 @@
 ﻿using carpool4.Models;
 using System;
 using System.Collections.Generic;
+using carpool4;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -52,6 +53,12 @@ namespace Carpool
             descriptionLabel.Text = route.Comments;
             departureLabel.Text = "Departure: \n" + route.Depart_Date.ToString("dd/MMMM H:mm ") + "h";
 
+            Uri uriImage = AzureStorage.DownloadPhoto(userRoute.ResourceName);
+            if (uriImage != null)
+            {
+                profileImage.Source = ImageSource.FromUri(uriImage);
+            }
+            
             Reservation reservation = new Reservation
             {
                 Id_Route = route.Id

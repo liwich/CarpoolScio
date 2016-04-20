@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using carpool4;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -30,17 +30,12 @@ namespace Carpool
             reservationResult = new List<Reservation>();
             usersList = new List<User>();
             currentUser = (User)Application.Current.Properties["user"];
-
-            
-            
             
             InitializeComponent();
 
             this.IsBusy = true;
 
             LoadRouteData(routeId);
-
-
             
         }
 
@@ -107,6 +102,13 @@ namespace Carpool
             phoneLabel.Text = "Phone: " + userRoute.Phone;
             descriptionLabel.Text = route.Comments;
             departureLabel.Text = "Departure: \n" + route.Depart_Date.ToString("dd/MMMM H:mm ") + "h";
+
+            Uri uriImage = AzureStorage.DownloadPhoto(userRoute.ResourceName);
+            if (uriImage != null)
+            {
+                profileImage.Source = ImageSource.FromUri(uriImage);
+            }
+
             if (reservationResult.Count != 0)
             {
                 seats = route.Capacity - reservationResult.Count;

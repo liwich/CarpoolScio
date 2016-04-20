@@ -12,11 +12,17 @@ namespace carpool4
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            if (value != null || AzureStorage.ExistPhoto(value.ToString()))
+            if (value != null)
             {
-                userManager = new UserManager();
-                return new Uri(parameter + value.ToString());
+                if (AzureStorage.ExistPhoto(value.ToString()))
+                {
+                    userManager = new UserManager();
+                    return new Uri(parameter + value.ToString());
+                }
+                else
+                {
+                    return "profile.jpg";
+                }
             }
             else
             {
