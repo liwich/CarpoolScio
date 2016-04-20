@@ -19,6 +19,10 @@ namespace Carpool
         private List<Reservation> reservationsList;
         private ReservationManager reservationManager;
 
+        private UserManager usersManager;
+        private IEnumerable<UserRoute> usersRoutes;
+        private List<User> userList;
+
         public ReservationsView()
         {
             InitializeComponent();
@@ -31,7 +35,8 @@ namespace Carpool
             reservationsList = new List<Reservation>();
             reservationManager = new ReservationManager();
 
-
+            usersManager = new UserManager();
+            userList = new List<User>();
 
             routesListView.ItemTemplate = new DataTemplate(typeof(RoutesCell));
 
@@ -50,6 +55,8 @@ namespace Carpool
         {
 
             routesReservations = new List<Route>();
+
+            userList = await usersManager.GetUsersWhere(user => user.Id != currentUser.Id);
 
             routesList = await routeManager.ListRoutesWhere(route => route.Id_User != currentUser.Id && route.Depart_Date > DateTime.Now);
             reservationsList = await reservationManager.GetReservationsWhere(reservation => reservation.Id_User == currentUser.Id);
@@ -75,7 +82,11 @@ namespace Carpool
                 await Navigation.PopAsync();
             }
 
-            routesListView.ItemsSource = routesReservations;
+            usersRoutes = from r in routesReservations
+                          join u in userList on r.Id_User equals u.Id
+                          select new UserRoute { IdRoute = r.Id, ResourceName = u.ResourceName, From = r.From, To = r.To };
+
+            routesListView.ItemsSource = usersRoutes;
 
             routesListView.IsRefreshing = false;
         }
@@ -95,13 +106,15 @@ namespace Carpool
         {
             if (string.IsNullOrWhiteSpace(e.NewTextValue))
             {
-                routesListView.ItemsSource = routesReservations;
+                routesListView.ItemsSource = usersRoutes;
             }
             else
             {
-                routesListView.ItemsSource =
-                    routesReservations.Where(
-                        route => route.From.Contains(e.NewTextValue) || route.To.Contains(e.NewTextValue));
+                IEnumerable<UserRoute> usersRoutes = from r in routesList
+                                                     join u in userList on r.Id_User equals u.Id
+                                                     where (r.From.ToLower().Contains(e.NewTextValue.ToLower()) || r.To.ToLower().Contains(e.NewTextValue.ToLower()))
+                                                     select new UserRoute() { IdRoute = r.Id, ResourceName = u.ResourceName, From = r.From, To = r.To };
+                routesListView.ItemsSource = usersRoutes;
             }
         }
     }

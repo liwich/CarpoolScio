@@ -25,7 +25,7 @@ namespace Carpool
             InitializeComponent();
 
             currentUser = (User)Application.Current.Properties["user"];
-            usersManager=new UserManager();
+            usersManager = new UserManager();
             userList = new List<User>();
 
             routesList = new List<Route>();
@@ -53,8 +53,7 @@ namespace Carpool
 
         private async void LoadRoutesList()
         {
-            userList =await usersManager.GetUsersWhere(user => user.Id != currentUser.Id);
-
+            userList = await usersManager.GetUsersWhere(user => user.Id != currentUser.Id);
 
             reservationsList = new List<Reservation>();
             routesListView.IsRefreshing = true;
@@ -91,7 +90,7 @@ namespace Carpool
 
             usersRoutes = from r in routesList
                           join u in userList on r.Id_User equals u.Id
-                          select new UserRoute{ IdRoute = r.Id, ResourceName = u.ResourceName, From = r.From, To = r.To };
+                          select new UserRoute { IdRoute = r.Id, ResourceName = u.ResourceName, From = r.From, To = r.To };
 
             routesListView.ItemsSource = usersRoutes;
 
@@ -142,10 +141,10 @@ namespace Carpool
             if (!string.IsNullOrWhiteSpace(e.NewTextValue))
             {
 
-                usersRoutes = from r in routesList
-                              join u in userList on r.Id_User equals u.Id
-                              where (r.From.ToLower().Contains(e.NewTextValue.ToLower()) || r.To.ToLower().Contains(e.NewTextValue.ToLower()))
-                              select new UserRoute(){IdRoute=r.Id, ResourceName = u.ResourceName, From = r.From, To = r.To };
+                IEnumerable<UserRoute> usersRoutes = from r in routesList
+                                                     join u in userList on r.Id_User equals u.Id
+                                                     where (r.From.ToLower().Contains(e.NewTextValue.ToLower()) || r.To.ToLower().Contains(e.NewTextValue.ToLower()))
+                                                     select new UserRoute() { IdRoute = r.Id, ResourceName = u.ResourceName, From = r.From, To = r.To };
                 routesListView.ItemsSource = usersRoutes;
             }
             else

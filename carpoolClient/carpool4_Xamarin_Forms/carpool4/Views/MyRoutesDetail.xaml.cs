@@ -30,13 +30,13 @@ namespace Carpool
             reservationResult = new List<Reservation>();
             usersList = new List<User>();
             currentUser = (User)Application.Current.Properties["user"];
-            
+
             InitializeComponent();
 
             this.IsBusy = true;
 
             LoadRouteData(routeId);
-            
+
         }
 
 
@@ -103,10 +103,13 @@ namespace Carpool
             descriptionLabel.Text = route.Comments;
             departureLabel.Text = "Departure: \n" + route.Depart_Date.ToString("dd/MMMM H:mm ") + "h";
 
-            Uri uriImage = AzureStorage.DownloadPhoto(userRoute.ResourceName);
-            if (uriImage != null)
+            if (!string.IsNullOrEmpty(userRoute.ResourceName))
             {
-                profileImage.Source = ImageSource.FromUri(uriImage);
+                Uri uriImage = AzureStorage.DownloadPhoto(userRoute.ResourceName);
+                if (uriImage != null)
+                {
+                    profileImage.Source = ImageSource.FromUri(uriImage);
+                }
             }
 
             if (reservationResult.Count != 0)

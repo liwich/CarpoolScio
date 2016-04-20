@@ -30,6 +30,8 @@ namespace Carpool
 
         private async void LoadRouteData(string routeId)
         {
+            this.IsBusy = true;
+
             route = await routeManager.GetRouteWhere(route => route.Id == routeId);
             userRoute = new User
             {
@@ -43,7 +45,6 @@ namespace Carpool
 
         private async void LoadData()
         {
-            this.IsBusy = true;
 
             userRoute = await usersManager.GetUserWhere(userSelect => userSelect.Id == userRoute.Id);
 
@@ -53,22 +54,22 @@ namespace Carpool
             descriptionLabel.Text = route.Comments;
             departureLabel.Text = "Departure: \n" + route.Depart_Date.ToString("dd/MMMM H:mm ") + "h";
 
-            Uri uriImage = AzureStorage.DownloadPhoto(userRoute.ResourceName);
-            if (uriImage != null)
+            if (!string.IsNullOrEmpty(userRoute.ResourceName))
             {
-                profileImage.Source = ImageSource.FromUri(uriImage);
+                Uri uriImage = AzureStorage.DownloadPhoto(userRoute.ResourceName);
+                if (uriImage != null)
+                {
+                    profileImage.Source = ImageSource.FromUri(uriImage);
+                }
             }
-            
+
             Reservation reservation = new Reservation
             {
                 Id_Route = route.Id
             };
 
             List<Reservation> reservations = await reservationsManager.GetReservationsWhere(reserv => reserv.Id_Route == reservation.Id_Route);
-
             seatsLabel.Text = "Seats Available: " + (route.Capacity - reservations.Count);
-
-            this.IsBusy = false;
         }
 
         private async void LoadReservation()
@@ -93,6 +94,8 @@ namespace Carpool
             {
                 reserveButton.IsVisible = true;
             }
+
+            this.IsBusy = false;
         }
 
         private async void OnStartingPoint(object sender, EventArgs e)
