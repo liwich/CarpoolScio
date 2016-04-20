@@ -6,5 +6,7 @@ namespace Carpool
         void SnapPic();
 
         void SelectPic();
+
+        byte[] Rotate(byte[] image, int g);
     }
 }

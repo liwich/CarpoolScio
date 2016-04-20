@@ -9,7 +9,14 @@
       <StackLayout Style="{StaticResource stackContent}">
 
         <StackLayout Orientation="Horizontal">
-          <Image  x:Name="profileImage" Source="profile.jpg"  Aspect="AspectFill" HeightRequest="150" WidthRequest="150"></Image>
+          <StackLayout Orientation="Vertical" >
+              <Image  x:Name="profileImage" Source="profile.jpg"  Aspect="AspectFill" HeightRequest="150" WidthRequest="150"></Image>
+              <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Style="{StaticResource buttonActionStyle}" Text="&lt;-"></Button>
+                <Button Style="{StaticResource buttonActionStyle}" Text="-&gt;"></Button>
+              </StackLayout>
+          </StackLayout>
+
           <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="10" Spacing="10">
             <Button Text="Camera" Style="{StaticResource buttonActionStyle}" Clicked="OnCamera"></Button>
             <Button Text="File" Style="{StaticResource buttonActionStyle}" Clicked="OnFile"></Button>

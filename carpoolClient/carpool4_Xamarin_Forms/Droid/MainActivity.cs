@@ -57,7 +57,7 @@ namespace carpool4.Droid
             builder.SetTitle(title);
             builder.Create().Show();
         }
-        
+
         protected override async void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             if (resultCode == Result.Canceled)
@@ -91,12 +91,7 @@ namespace carpool4.Droid
             // Load the bitmap
             Bitmap originalImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
             Bitmap resizedImage = Bitmap.CreateScaledBitmap(originalImage, originalImage.Width / 3, originalImage.Height / 3, false);
-            Matrix matrix = new Matrix();
 
-            matrix.PostRotate(90);
-
-            resizedImage = Bitmap.CreateBitmap(resizedImage, 0, 0, resizedImage.Width, resizedImage.Height, matrix,
-                true);
             using (MemoryStream ms = new MemoryStream())
             {
                 resizedImage.Compress(Bitmap.CompressFormat.Jpeg, 100, ms);
@@ -131,6 +126,20 @@ namespace carpool4.Droid
             });
 
             activity.StartActivityForResult(intent, 1);
+        }
+
+        public byte[] Rotate(byte[] image, int g)
+        {
+            Bitmap originalImage = BitmapFactory.DecodeByteArray(image, 0, image.Length);
+            Bitmap rotatedImage = Bitmap.CreateScaledBitmap(originalImage, originalImage.Width / 3, originalImage.Height / 3, false);
+            Matrix matrix = new Matrix();
+
+            matrix.PostRotate(g);
+
+            rotatedImage = Bitmap.CreateBitmap(rotatedImage, 0, 0, rotatedImage.Width, rotatedImage.Height, matrix,
+                true);
+
+            return rotatedImage.ToArray<byte>();
         }
 
         static MainActivity instance = null;
