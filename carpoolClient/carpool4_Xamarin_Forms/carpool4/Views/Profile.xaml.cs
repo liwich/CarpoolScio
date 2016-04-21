@@ -1,16 +1,12 @@
 ﻿using carpool4;
 using carpool4.Models;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Carpool
 {
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
-
     public partial class Profile : ContentPage
     {
 
@@ -51,6 +47,7 @@ namespace Carpool
 
         void LoadData()
         {
+            IsBusy = true;
             string[] genders = { "Male", "Female" };
 
             Uri photoUri = null;
@@ -86,6 +83,8 @@ namespace Carpool
                     }
                 }
             }
+
+            IsBusy = false;
         }
 
         async Task UpdateUser(User user)
@@ -141,7 +140,7 @@ namespace Carpool
                     {
                         AzureStorage.DeletePhoto(oldResourceName);
                     }
-                }    
+                }
 
                 await UpdateUser(user);
                 activityIndicator.IsRunning = false;
@@ -154,24 +153,41 @@ namespace Carpool
         {
             IPictureTaker pictureTake =
             DependencyService.Get<IPictureTaker>();
-
             pictureTake.SnapPic();
         }
 
-        public async void ShowImage(byte[] resizedImage, Stream stream)
+        public async void ShowImage(byte[] resizedImage)
         {
-            profileImage.Source = ImageSource.FromStream(() => new MemoryStream(resizedImage));
-            newResourceName = Guid.NewGuid().ToString();
-            this.profileImageBytes = resizedImage;
+            ChangeImage(resizedImage);
         }
 
         async void OnFile(object sender, EventArgs e)
         {
             IPictureTaker pictureTake =
             DependencyService.Get<IPictureTaker>();
-
             pictureTake.SelectPic();
         }
-        
+
+        async void OnRotateLeft(object sender, EventArgs e)
+        {
+            IPictureTaker pictureTaker = DependencyService.Get<IPictureTaker>();
+
+            ChangeImage(pictureTaker.Rotate(profileImageBytes, -90));
+        }
+
+        async void OnRotateRight(object sender, EventArgs e)
+        {
+            IPictureTaker pictureTaker = DependencyService.Get<IPictureTaker>();
+            ChangeImage(pictureTaker.Rotate(profileImageBytes, -90));
+        }
+
+        private void ChangeImage(byte[] image)
+        {
+            newResourceName = Guid.NewGuid().ToString();
+            profileImageBytes = image;
+            profileImage.Source = ImageSource.FromStream(() => new MemoryStream(image));
+            leftButton.IsVisible = true;
+            rightButton.IsVisible = true;
+        }
     }
 }

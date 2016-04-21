@@ -80,7 +80,7 @@ namespace carpool4.Droid
 
                 byte[] resizedImage = MainActivity.ResizeImageAndroid(imageData, 400, 400);
 
-                Profile.Instance.ShowImage(resizedImage, stream);
+                Profile.Instance.ShowImage(resizedImage);
 
                 GC.Collect();
             }
@@ -130,8 +130,8 @@ namespace carpool4.Droid
 
         public byte[] Rotate(byte[] image, int g)
         {
-            Bitmap originalImage = BitmapFactory.DecodeByteArray(image, 0, image.Length);
-            Bitmap rotatedImage = Bitmap.CreateScaledBitmap(originalImage, originalImage.Width / 3, originalImage.Height / 3, false);
+            Bitmap rotatedImage = BitmapFactory.DecodeByteArray(image, 0, image.Length);
+
             Matrix matrix = new Matrix();
 
             matrix.PostRotate(g);
@@ -139,7 +139,15 @@ namespace carpool4.Droid
             rotatedImage = Bitmap.CreateBitmap(rotatedImage, 0, 0, rotatedImage.Width, rotatedImage.Height, matrix,
                 true);
 
-            return rotatedImage.ToArray<byte>();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                rotatedImage.Compress(Bitmap.CompressFormat.Jpeg, 100, ms);
+
+                return ms.ToArray();
+            }
+
+            GC.Collect();
+
         }
 
         static MainActivity instance = null;
