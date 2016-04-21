@@ -178,7 +178,7 @@ namespace Carpool
         async void OnRotateRight(object sender, EventArgs e)
         {
             IPictureTaker pictureTaker = DependencyService.Get<IPictureTaker>();
-            ChangeImage(pictureTaker.Rotate(profileImageBytes, -90));
+            ChangeImage(pictureTaker.Rotate(profileImageBytes, 90));
         }
 
         private void ChangeImage(byte[] image)
